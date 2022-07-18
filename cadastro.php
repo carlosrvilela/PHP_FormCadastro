@@ -1,8 +1,8 @@
 <?php
 require 'autoload.php';
 
-$usuario = new App\Loja\Usuario($_POST['nome'], $_POST['senha']);
-$contato = new App\Loja\Contato($_POST['email'], $_POST['endereco'], $_POST['cep']);
+$usuario = new App\Loja\Usuario($_POST['nome'], $_POST['senha'], $_POST['genero']);
+$contato = new App\Loja\Contato($_POST['email'], $_POST['endereco'], $_POST['cep'], $_POST['telefone']);
 ?>
 
 <!DOCTYPE html>
@@ -18,15 +18,15 @@ $contato = new App\Loja\Contato($_POST['email'], $_POST['endereco'], $_POST['cep
 
 <div class="mx-5 my-5">
 <h1>Cadastro feito com sucesso.</h1>
-<p>Seguem os dados de sua conta:</p>
+<p><?php print htmlspecialchars($usuario->getTratamento()); ?>, seguem os dados de sua conta:</p>
 <ul class="list-group">
-    <li class="list-group-item">Primeiro nome: <?php print $usuario->getNome(); ?></li>
-    <li class="list-group-item">Sobrenome: <?php print $usuario->getSobrenome(); ?></li>
-    <li class="list-group-item">Usuário: <?php print $contato->getNomeUsuario(); ?></li>
-    <li class="list-group-item">Senha: <?php print $usuario->getSenha(); ?></li>
-    <li class="list-group-item">Telefone: </li>
-    <li class="list-group-item">Email: <?php print $contato->getEmail(); ?></li>
-    <li class="list-group-item">Endereço: <?php print $contato->getEnderecoCep(); ?></li> </li>
+    <li class="list-group-item">Primeiro nome: <?php print htmlspecialchars($usuario->getNome()); ?></li>
+    <li class="list-group-item">Sobrenome: <?php print htmlspecialchars($usuario->getSobrenome()); ?></li>
+    <li class="list-group-item">Usuário: <?php print htmlspecialchars($contato->getNomeUsuario()); ?></li>
+    <li class="list-group-item">Senha: <?php print htmlspecialchars($usuario->getSenha()); ?></li>
+    <li class="list-group-item">Telefone: <?php print htmlspecialchars($contato->getTelefone()); ?></li> </li>
+    <li class="list-group-item">Email: <?php print htmlspecialchars($contato->getEmail()); ?></li>
+    <li class="list-group-item">Endereço: <?php print htmlspecialchars($contato->getEnderecoCep()); ?></li> </li>
 </ul>
 </div>
 </body>

@@ -5,13 +5,15 @@ class Usuario{
     private $nome;
     private $sobrenome;
     private $senha;
+    private $tratamento;
 
-    public function __construct(string $nomeCompleto, string $senha)
+    public function __construct(string $nomeCompleto, string $senha, string $genero)
     {
         $nomeSobrenome = $this->separaNomeSobrenome($nomeCompleto);
         $this->nome = $nomeSobrenome['nome'];
         $this->sobrenome = $nomeSobrenome['sobrenome'];
         $this->validaSenha($senha);
+        $this->addTratamento($nomeCompleto, $genero);
     }
 
     private function separaNomeSobrenome(string $nomeSobrenome)
@@ -24,6 +26,22 @@ class Usuario{
             $sobrenome = 'Sobrenome Inválido';
         }
         return ['nome'=>$nome, 'sobrenome'=>$sobrenome];
+    }
+
+    private function addTratamento($nomeCompleto, $genero)
+    {
+        if ($genero === 'M') {
+            $this->tratamento = preg_replace('/^(\w+)\b/', 'Sr.', $nomeCompleto, 1);
+        }
+    
+        if ($genero === 'F') {
+            $this->tratamento = preg_replace('/^(\w+)\b/', 'Srª.', $nomeCompleto, 1);
+        }
+    }
+
+    public function getTratamento(): string
+    {
+        return $this->tratamento;
     }
 
     public function getNome(): string
