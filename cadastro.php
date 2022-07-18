@@ -1,12 +1,8 @@
 <?php
-use \Loja\Usuario;
-use \Loja\Contato;
+require 'autoload.php';
 
-require 'Usuario.php';
-require 'Contato.php';
-
-$usuario = new Usuario($_POST['nome']);
-$contato = new Contato($_POST['email']);
+$usuario = new App\Loja\Usuario($_POST['nome'], $_POST['senha']);
+$contato = new App\Loja\Contato($_POST['email'], $_POST['endereco'], $_POST['cep']);
 ?>
 
 <!DOCTYPE html>
@@ -24,13 +20,13 @@ $contato = new Contato($_POST['email']);
 <h1>Cadastro feito com sucesso.</h1>
 <p>Seguem os dados de sua conta:</p>
 <ul class="list-group">
-    <li class="list-group-item">Primeiro nome: <?php print $usuario->getNome(); ?> </li>
-    <li class="list-group-item">Sobrenome: <?php print $usuario->getSobrenome(); ?> </li>
+    <li class="list-group-item">Primeiro nome: <?php print $usuario->getNome(); ?></li>
+    <li class="list-group-item">Sobrenome: <?php print $usuario->getSobrenome(); ?></li>
     <li class="list-group-item">Usuário: <?php print $contato->getNomeUsuario(); ?></li>
-    <li class="list-group-item">Senha: </li>
+    <li class="list-group-item">Senha: <?php print $usuario->getSenha(); ?></li>
     <li class="list-group-item">Telefone: </li>
-    <li class="list-group-item">Email: </li>
-    <li class="list-group-item">Endereço: </li>
+    <li class="list-group-item">Email: <?php print $contato->getEmail(); ?></li>
+    <li class="list-group-item">Endereço: <?php print $contato->getEnderecoCep(); ?></li> </li>
 </ul>
 </div>
 </body>
